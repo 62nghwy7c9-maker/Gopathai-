@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gophai Thai Imbiss · Fragebogen Runde 1 — Eure Wunsch-Website</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <style>
+    @font-face { font-family:'Bungee'; src:url('assets/fonts/bungee-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Anton'; src:url('assets/fonts/anton-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Permanent Marker'; src:url('assets/fonts/permanent-marker-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Archivo'; src:url('assets/fonts/archivo-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Archivo'; src:url('assets/fonts/archivo-latin-500-normal.woff2') format('woff2'); font-weight:500; font-display:swap; }
+    @font-face { font-family:'Archivo'; src:url('assets/fonts/archivo-latin-700-normal.woff2') format('woff2'); font-weight:700; font-display:swap; }
+
+    :root {
+      --gelb:#FFD400; --blau:#123C86; --blau-d:#0C2B63; --rot:#D6301F;
+      --schwarz:#17181C; --creme:#FAF3E1; --weiss:#fff;
+      --grau:#5b5f68; --linie:#d9dcE4;
+      --fd:'Bungee',sans-serif; --fh:'Anton',sans-serif; --fm:'Permanent Marker',cursive; --fb:'Archivo',system-ui,sans-serif;
+      --r:12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:var(--fb); color:var(--schwarz); background:var(--creme); line-height:1.55; -webkit-font-smoothing:antialiased; }
+    ::selection { background:var(--blau); color:var(--gelb); }
+    :focus-visible { outline:3px solid var(--rot); outline-offset:2px; border-radius:4px; }
+
+    /* Header */
+    .fb-header { background:var(--gelb); border-bottom:4px solid var(--blau); padding:34px clamp(16px,5vw,48px) 30px; }
+    .fb-header__inner { max-width:820px; margin:0 auto; }
+    .fb-kicker { font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:13px; color:var(--blau-d); }
+    .fb-title { font-family:var(--fd); color:var(--blau); font-size:clamp(34px,7vw,64px); line-height:.95; margin:6px 0 4px; }
+    .fb-sub { font-family:var(--fm); color:var(--rot); font-size:clamp(18px,3vw,24px); transform:rotate(-1.5deg); display:inline-block; }
+    .fb-intro { max-width:820px; margin:22px auto 0; font-size:16px; }
+    .fb-intro strong { color:var(--blau); }
+
+    main { max-width:820px; margin:0 auto; padding:clamp(24px,5vw,44px) clamp(16px,5vw,48px) 40px; }
+
+    /* Fortschritt / Hinweis */
+    .fb-note { background:var(--weiss); border:2px solid var(--blau); border-radius:var(--r); padding:16px 18px; margin-bottom:30px; font-size:14.5px; }
+    .fb-note b { color:var(--blau); }
+
+    /* Sektion */
+    .sec { border:none; margin:0 0 30px; background:var(--weiss); border-radius:16px; border:1px solid var(--linie); overflow:hidden; }
+    .sec__head { display:flex; align-items:center; gap:14px; background:var(--blau); color:var(--weiss); padding:14px 20px; }
+    .sec__num { font-family:var(--fd); background:var(--gelb); color:var(--blau); width:38px; height:38px; border-radius:9px; display:grid; place-items:center; font-size:18px; flex:none; }
+    .sec__title { font-family:var(--fh); text-transform:uppercase; letter-spacing:.03em; font-size:clamp(19px,2.6vw,24px); }
+    .sec__body { padding:20px clamp(16px,3vw,24px) 24px; display:flex; flex-direction:column; gap:22px; }
+
+    /* Frage */
+    .q { display:flex; flex-direction:column; gap:9px; }
+    .q > .q-label { font-weight:700; font-size:15.5px; }
+    .q .hint { font-size:13px; color:var(--grau); font-weight:400; }
+    .q-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; }
+    @media (max-width:620px){ .q-grid { grid-template-columns:1fr; } }
+
+    input[type=text], input[type=email], input[type=tel], textarea {
+      font:inherit; font-size:15px; width:100%; background:var(--creme);
+      border:2px solid var(--linie); border-radius:10px; padding:11px 13px; color:var(--schwarz);
+      transition:border-color .18s ease, background .18s ease;
+    }
+    input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, textarea:focus {
+      outline:none; border-color:var(--blau); background:var(--weiss);
+    }
+    textarea { min-height:82px; resize:vertical; }
+    label.field { display:flex; flex-direction:column; gap:6px; font-size:13.5px; font-weight:600; color:var(--grau); }
+    label.field span { color:var(--schwarz); }
+
+    /* Optionen (radio / checkbox) */
+    .opts { display:flex; flex-wrap:wrap; gap:10px; }
+    .opts.col { flex-direction:column; gap:8px; }
+    .opt {
+      display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+      background:var(--creme); border:2px solid var(--linie); border-radius:999px;
+      padding:9px 16px; font-size:14.5px; font-weight:600; transition:border-color .15s ease, background .15s ease;
+      min-height:44px;
+    }
+    .opt.wide { border-radius:12px; width:100%; }
+    .opt:hover { border-color:var(--blau); }
+    .opt input { accent-color:var(--blau); width:18px; height:18px; flex:none; cursor:pointer; }
+    .opt:has(input:checked) { border-color:var(--blau); background:#eef2fb; }
+
+    /* Aktionen */
+    .fb-actions { background:var(--blau); border-radius:16px; padding:clamp(20px,4vw,30px); color:var(--weiss); margin-top:6px; }
+    .fb-actions h2 { font-family:var(--fh); text-transform:uppercase; letter-spacing:.03em; font-size:26px; color:var(--gelb); margin-bottom:6px; }
+    .fb-actions p { font-size:14.5px; margin-bottom:16px; opacity:.95; }
+    .btn { font:inherit; font-weight:700; font-size:16px; border-radius:12px; border:3px solid var(--gelb); cursor:pointer;
+      padding:14px 22px; min-height:50px; display:inline-flex; align-items:center; gap:10px; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease; }
+    .btn--yellow { background:var(--gelb); color:var(--blau); }
+    .btn--yellow:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--blau-d); }
+    .btn--ghost { background:transparent; color:var(--gelb); }
+    .btn--ghost:hover { background:rgba(255,255,255,.08); }
+    .btn-row { display:flex; flex-wrap:wrap; gap:12px; }
+
+    .summary-wrap { margin-top:20px; display:none; }
+    .summary-wrap.show { display:block; }
+    #summary { width:100%; min-height:240px; font-family:ui-monospace, 'SF Mono', Menlo, monospace; font-size:13px; line-height:1.5;
+      background:var(--blau-d); color:#eaf0ff; border:2px solid var(--gelb); border-radius:12px; padding:14px; resize:vertical; }
+    .summary-btns { display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
+    .toast { font-size:14px; font-weight:700; color:var(--gelb); margin-top:10px; min-height:20px; }
+
+    footer { text-align:center; padding:26px 16px 40px; font-size:13px; color:var(--grau); }
+    footer b { color:var(--blau); }
+
+    /* Print */
+    .print-hint { text-align:center; font-size:13px; color:var(--grau); margin-top:14px; }
+    @media print {
+      body { background:#fff; }
+      .fb-header { background:#fff; border-bottom:2px solid #000; }
+      .no-print, .fb-actions, .fb-note { display:none !important; }
+      .sec { break-inside:avoid; border:1px solid #999; }
+      .sec__head { background:#fff; color:#000; border-bottom:1px solid #999; }
+      .sec__num { background:#eee; color:#000; }
+      input, textarea, .opt { background:#fff !important; }
+    }
+    @media (prefers-reduced-motion:reduce){ *{transition:none!important;} }
+  </style>
+</head>
+<body>
+  <header class="fb-header">
+    <div class="fb-header__inner">
+      <p class="fb-kicker">Eure neue Website · Runde 1</p>
+      <h1 class="fb-title">GOPHAI</h1>
+      <p class="fb-sub">„Erzählt uns, was Ihr Euch wünscht!"</p>
+    </div>
+  </header>
+
+  <p class="fb-intro">
+    Damit wir Eure Website genau nach Euren Vorstellungen bauen, brauchen wir ein paar Infos von Euch.
+    Füllt einfach aus, was Ihr wisst — <strong>nichts muss perfekt sein</strong>. Am Ende auf
+    <strong>„Zusammenfassung erstellen"</strong> tippen und die Antworten mit einem Klick abschicken. Dauert ca. 10 Minuten.
+  </p>
+
+  <main>
+    <div class="fb-note">
+      <b>Tipp:</b> Ihr könnt das Formular auch am Handy ausfüllen. Was Ihr nicht wisst, lasst Ihr einfach frei —
+      wir klären den Rest im Gespräch.
+    </div>
+
+    <form id="fb-form">
+      <!-- 1 -->
+      <fieldset class="sec" data-sec="1 · Kontakt & Basis">
+        <div class="sec__head"><span class="sec__num">1</span><span class="sec__title">Kontakt &amp; Basis</span></div>
+        <div class="sec__body">
+          <div class="q q-grid">
+            <label class="field"><span>Ansprechpartner (Name)</span><input type="text" data-field="Ansprechpartner"></label>
+            <label class="field"><span>Telefon</span><input type="tel" data-field="Telefon"></label>
+            <label class="field"><span>E-Mail</span><input type="email" data-field="E-Mail"></label>
+            <label class="field"><span>Firmierung / Inhaber (fürs Impressum)</span><input type="text" data-field="Firmierung/Inhaber" value="Gophai Thai Imbiss · Justin Herbst"></label>
+            <label class="field"><span>USt-IdNr. (falls vorhanden)</span><input type="text" data-field="USt-IdNr"></label>
+          </div>
+
+          <div class="q" data-label="Öffnungszeiten">
+            <span class="q-label">Stimmen die Öffnungszeiten noch? <span class="hint">Aktuell hinterlegt: Mi–So 11–21 Uhr, Mo &amp; Di Ruhetag.</span></span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="oeffnung" data-field="Öffnungszeiten">Ja, stimmt so</label>
+              <label class="opt"><input type="radio" name="oeffnung" data-field="Öffnungszeiten">Weicht ab (bitte unten eintragen)</label>
+            </div>
+            <input type="text" data-field="Öffnungszeiten – falls abweichend" placeholder="Falls abweichend: neue Zeiten eintragen …">
+          </div>
+
+          <div class="q" data-label="Zahlarten">
+            <span class="q-label">Welche Zahlarten nehmt Ihr an?</span>
+            <div class="opts">
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">Bar</label>
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">EC / Maestro</label>
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">VISA</label>
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">Mastercard</label>
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">PayPal</label>
+              <label class="opt"><input type="checkbox" data-field="Zahlarten">Sonstige</label>
+            </div>
+          </div>
+
+          <div class="q" data-label="Lieferung">
+            <span class="q-label">Liefert Ihr auch?</span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="liefern" data-field="Lieferung">Ja</label>
+              <label class="opt"><input type="radio" name="liefern" data-field="Lieferung">Nein, nur Abholung</label>
+            </div>
+            <div class="q-grid">
+              <label class="field"><span>Liefergebiet / Orte</span><input type="text" data-field="Liefergebiet"></label>
+              <label class="field"><span>Mindestbestellwert</span><input type="text" data-field="Mindestbestellwert"></label>
+              <label class="field"><span>Liefergebühr</span><input type="text" data-field="Liefergebühr"></label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 2 -->
+      <fieldset class="sec" data-sec="2 · Speisekarte">
+        <div class="sec__head"><span class="sec__num">2</span><span class="sec__title">Speisekarte</span></div>
+        <div class="sec__body">
+          <div class="q" data-label="Karte aktuell?">
+            <span class="q-label">Ist die Speisekarte (Nr. 1–98) noch aktuell?</span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="karte" data-field="Karte aktuell?">Ja, unverändert</label>
+              <label class="opt"><input type="radio" name="karte" data-field="Karte aktuell?">Es gibt Änderungen</label>
+            </div>
+          </div>
+          <div class="q" data-label="Änderungen an Gerichten">
+            <span class="q-label">Neue, gestrichene oder geänderte Gerichte? <span class="hint">Gericht + Nr. + was ändert sich</span></span>
+            <textarea data-field="Änderungen an Gerichten" placeholder="z. B. Nr. 30 gestrichen · neu: Pad See Ew mit Tofu, 11,00 €"></textarea>
+          </div>
+          <div class="q" data-label="Preisänderungen">
+            <span class="q-label">Preisänderungen?</span>
+            <textarea data-field="Preisänderungen" placeholder="z. B. alle Currys +1,00 € · Getränke unverändert"></textarea>
+          </div>
+          <div class="q q-grid">
+            <label class="field"><span>Saison-/Aktionsgerichte (z. B. Mango-Klebereis) — Zeitraum?</span><input type="text" data-field="Saisongerichte"></label>
+          </div>
+          <div class="q" data-label="Kennzeichnungen">
+            <span class="q-label">Sollen wir zusätzlich kennzeichnen?</span>
+            <div class="opts">
+              <label class="opt"><input type="checkbox" data-field="Kennzeichnungen">Vegetarisch</label>
+              <label class="opt"><input type="checkbox" data-field="Kennzeichnungen">Vegan</label>
+              <label class="opt"><input type="checkbox" data-field="Kennzeichnungen">Glutenfrei</label>
+              <label class="opt"><input type="checkbox" data-field="Kennzeichnungen">Beliebteste Gerichte / Empfehlungen</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 3 -->
+      <fieldset class="sec" data-sec="3 · Marke, Fotos & Look">
+        <div class="sec__head"><span class="sec__num">3</span><span class="sec__title">Marke, Fotos &amp; Look</span></div>
+        <div class="sec__body">
+          <div class="q" data-label="Logo-Datei">
+            <span class="q-label">Habt Ihr das Logo (Maske + Schriftzug) als Originaldatei?</span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="logo" data-field="Logo-Datei">Ja, als Vektor (SVG/AI/PDF)</label>
+              <label class="opt"><input type="radio" name="logo" data-field="Logo-Datei">Nur als Foto/PNG</label>
+              <label class="opt"><input type="radio" name="logo" data-field="Logo-Datei">Weiß ich nicht</label>
+            </div>
+          </div>
+          <div class="q" data-label="Fotos">
+            <span class="q-label">Wie sieht es mit Fotos aus?</span>
+            <div class="opts col">
+              <label class="opt wide"><input type="radio" name="fotos" data-field="Fotos">Wir haben professionelle Fotos (liefern wir)</label>
+              <label class="opt wide"><input type="radio" name="fotos" data-field="Fotos">Wir haben Handyfotos (liefern wir)</label>
+              <label class="opt wide"><input type="radio" name="fotos" data-field="Fotos">Wir hätten gern ein professionelles Foto-Shooting</label>
+            </div>
+          </div>
+          <div class="q" data-label="Look-Feedback">
+            <span class="q-label">Der aktuelle Look (Gelb/Blau, Khon-Maske) — passt der für Euch?</span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="look" data-field="Look-Feedback">Ja, gefällt uns</label>
+              <label class="opt"><input type="radio" name="look" data-field="Look-Feedback">Grundsätzlich ja, aber …</label>
+              <label class="opt"><input type="radio" name="look" data-field="Look-Feedback">Wir wünschen uns etwas anderes</label>
+            </div>
+            <textarea data-field="Änderungswünsche Look" placeholder="Falls Änderungswünsche: was genau? (Farben, Schrift, Stimmung …)"></textarea>
+          </div>
+          <div class="q q-grid">
+            <label class="field"><span>Slogan / Motto (falls gewünscht)</span><input type="text" data-field="Slogan" placeholder="z. B. Original Thai. Frisch vom Wok."></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 4 -->
+      <fieldset class="sec" data-sec="4 · Funktionen & individuelle Wünsche">
+        <div class="sec__head"><span class="sec__num">4</span><span class="sec__title">Funktionen &amp; Wünsche</span></div>
+        <div class="sec__body">
+          <div class="q" data-label="Gewünschte Funktionen">
+            <span class="q-label">Was wünscht Ihr Euch auf der Website? <span class="hint">Mehrfachauswahl</span></span>
+            <div class="opts col">
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Online-Bestellung / Warenkorb</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Tischreservierung</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Google-Bewertungen anzeigen</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Google-Maps-Karte einbinden</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Speisekarte als PDF zum Download</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Anfrageformular für Partyservice/Catering</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Gutscheine</label>
+              <label class="opt wide"><input type="checkbox" data-field="Gewünschte Funktionen">Mehrsprachig (Deutsch / Englisch)</label>
+            </div>
+          </div>
+          <div class="q q-grid">
+            <label class="field"><span>Social-Media-Profile (Links) <span class="hint" style="font-weight:400">Instagram ist bereits verlinkt</span></span><input type="text" data-field="Social Media" placeholder="Instagram / Facebook / TikTok …"></label>
+          </div>
+          <div class="q" data-label="Sonstige Wünsche">
+            <span class="q-label">Habt Ihr noch andere Wünsche oder Ideen?</span>
+            <textarea data-field="Sonstige Wünsche" placeholder="Erzählt uns einfach, was Euch wichtig ist …"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 5 -->
+      <fieldset class="sec" data-sec="5 · Domain, E-Mail & Hosting">
+        <div class="sec__head"><span class="sec__num">5</span><span class="sec__title">Domain, E-Mail &amp; Hosting</span></div>
+        <div class="sec__body">
+          <div class="q q-grid">
+            <label class="field"><span>Wunsch-Domain</span><input type="text" data-field="Wunsch-Domain" placeholder="z. B. gophai-thai.de"></label>
+            <label class="field"><span>Bestehende Domain / Website</span><input type="text" data-field="Bestehende Domain" placeholder="falls vorhanden"></label>
+            <label class="field"><span>E-Mail für Kontaktanfragen</span><input type="email" data-field="Kontakt-E-Mail" value="gophaithai@web.de"></label>
+          </div>
+          <div class="q" data-label="Hosting vorhanden?">
+            <span class="q-label">Habt Ihr schon einen Webspace / Hosting-Anbieter?</span>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="hosting" data-field="Hosting vorhanden?">Ja</label>
+              <label class="opt"><input type="radio" name="hosting" data-field="Hosting vorhanden?">Nein</label>
+              <label class="opt"><input type="radio" name="hosting" data-field="Hosting vorhanden?">Weiß ich nicht</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 6 -->
+      <fieldset class="sec" data-sec="6 · Zeitplan & Anmerkungen">
+        <div class="sec__head"><span class="sec__num">6</span><span class="sec__title">Zeitplan &amp; Anmerkungen</span></div>
+        <div class="sec__body">
+          <div class="q q-grid">
+            <label class="field"><span>Wunschtermin / Anlass</span><input type="text" data-field="Wunschtermin" placeholder="z. B. bis Ende des Monats"></label>
+            <label class="field"><span>Budgetrahmen (optional)</span><input type="text" data-field="Budget"></label>
+          </div>
+          <div class="q" data-label="Weitere Anmerkungen">
+            <span class="q-label">Weitere Anmerkungen</span>
+            <textarea data-field="Weitere Anmerkungen"></textarea>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="fb-actions no-print">
+      <h2>Fertig? Antworten abschicken</h2>
+      <p>Erstellt die Zusammenfassung und schickt sie mit einem Klick — oder kopiert sie und sendet sie per WhatsApp.</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn--yellow" id="gen">Zusammenfassung erstellen</button>
+        <button type="button" class="btn btn--ghost" id="print">Als PDF drucken</button>
+      </div>
+      <div class="summary-wrap" id="summary-wrap">
+        <textarea id="summary" readonly aria-label="Zusammenfassung Eurer Antworten"></textarea>
+        <div class="summary-btns">
+          <a class="btn btn--yellow" id="mail" href="#">Per E-Mail senden</a>
+          <button type="button" class="btn btn--ghost" id="copy">Antworten kopieren</button>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+    <p class="print-hint no-print">Lieber auf Papier? Einfach „Als PDF drucken" wählen und ausdrucken.</p>
+  </main>
+
+  <footer>
+    <p><b>Gophai Thai Imbiss</b> · Kölnerstraße 73 · 50171 Kerpen · 02237 / 60 36 457</p>
+    <p>Fragebogen zur Website-Erstellung — Runde 1</p>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      var EMPFAENGER = 'kira.moewes@gmx.de';
+
+      function valueFor(field) {
+        var texts = [], radios = [], checks = [];
+        document.querySelectorAll('[data-field="' + cssEscape(field) + '"]').forEach(function (el) {
+          if (el.type === 'radio') { if (el.checked) radios.push(labelText(el)); }
+          else if (el.type === 'checkbox') { if (el.checked) checks.push(labelText(el)); }
+          else if (el.value && el.value.trim()) texts.push(el.value.trim());
+        });
+        return radios.concat(checks).concat(texts).filter(Boolean).join(', ');
+      }
+      function labelText(el) {
+        var l = el.closest('label');
+        return l ? l.textContent.trim() : '';
+      }
+      function cssEscape(s){ return s.replace(/"/g,'\\"'); }
+
+      function buildSummary() {
+        var lines = [];
+        lines.push('GOPHAI THAI IMBISS — FRAGEBOGEN RUNDE 1');
+        lines.push('Ausgefüllt am ' + new Date().toLocaleDateString('de-DE'));
+        lines.push('==============================================');
+        var seen = {};
+        document.querySelectorAll('.sec').forEach(function (sec) {
+          lines.push('');
+          lines.push('■ ' + sec.dataset.sec);
+          var fields = [];
+          sec.querySelectorAll('[data-field]').forEach(function (el) {
+            var f = el.getAttribute('data-field');
+            if (fields.indexOf(f) === -1) fields.push(f);
+          });
+          fields.forEach(function (f) {
+            var v = valueFor(f);
+            lines.push('• ' + f + ': ' + (v || '—'));
+          });
+        });
+        lines.push('');
+        lines.push('==============================================');
+        lines.push('Bitte an ' + EMPFAENGER + ' senden. Danke!');
+        return lines.join('\n');
+      }
+
+      var wrap = document.getElementById('summary-wrap');
+      var out = document.getElementById('summary');
+      var toast = document.getElementById('toast');
+
+      document.getElementById('gen').addEventListener('click', function () {
+        out.value = buildSummary();
+        wrap.classList.add('show');
+        var mail = document.getElementById('mail');
+        mail.href = 'mailto:' + EMPFAENGER +
+          '?subject=' + encodeURIComponent('Gophai Website — Fragebogen Runde 1') +
+          '&body=' + encodeURIComponent(out.value);
+        toast.textContent = '';
+        wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+      document.getElementById('copy').addEventListener('click', function () {
+        out.select();
+        var done = function () { toast.textContent = '✓ Antworten kopiert — jetzt z. B. per WhatsApp einfügen.'; };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(out.value).then(done, function () { document.execCommand('copy'); done(); });
+        } else { document.execCommand('copy'); done(); }
+      });
+
+      document.getElementById('print').addEventListener('click', function () { window.print(); });
+    })();
+  </script>
+</body>
+</html>
