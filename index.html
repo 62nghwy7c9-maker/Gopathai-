@@ -107,12 +107,27 @@
           </div>
           <p class="hero__status anim-hero" data-open-status aria-live="polite"></p>
         </div>
-        <div class="hero__visual" aria-hidden="true">
-          <img src="assets/img/mask.webp" alt="" width="270" height="288" class="hero__mask anim-mask">
-          <figure class="polaroid polaroid--hero anim-hero">
-            <img src="assets/img/mango.webp" alt="Klebereis mit Mango auf schwarzem Teller" width="380" height="414" loading="eager">
+        <div class="hero__visual">
+          <figure class="polaroid polaroid--main anim-hero">
+            <img src="assets/img/mango.webp" alt="Klebereis mit frischer Mango auf schwarzem Teller" width="380" height="414" loading="eager">
             <figcaption>Klebereis mit Mango</figcaption>
           </figure>
+          <figure class="polaroid polaroid--accent anim-hero">
+            <img src="assets/img/buffet.webp" alt="Thailändisches Buffet mit Currys, Frühlingsrollen und gebratenem Reis" width="380" height="447" loading="eager">
+          </figure>
+          <div class="hero__seal" aria-hidden="true">
+            <svg class="seal-ring" viewBox="0 0 200 200">
+              <defs>
+                <path id="seal-path" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"></path>
+              </defs>
+              <circle cx="100" cy="100" r="98" fill="#123C86"></circle>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="#FFD400" stroke-width="2"></circle>
+              <text fill="#FFD400" font-family="Anton, sans-serif" font-size="16" letter-spacing="2.6">
+                <textPath href="#seal-path" startOffset="0">HALAL ✓ · ORIGINAL THAI · KERPEN · FRISCH VOM WOK · </textPath>
+              </text>
+            </svg>
+            <div class="seal-core"><span>100%</span><span>Halal</span></div>
+          </div>
         </div>
       </div>
       <div class="marquee" aria-hidden="true">

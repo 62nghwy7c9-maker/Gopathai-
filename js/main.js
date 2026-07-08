@@ -231,11 +231,11 @@
   intro
     .from('.hero__title .char', { yPercent: 115, duration: 0.7, stagger: 0.035 })
     .from('.anim-hero', { y: 26, autoAlpha: 0, duration: 0.55, stagger: 0.09 }, '-=0.35')
-    .from('.anim-mask', { scale: 0.6, rotation: -8, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.6)' }, '-=0.65');
+    .from('.hero__seal', { scale: 0.4, autoAlpha: 0, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.45');
 
-  // Maske schwebt dezent
-  gsap.to('.hero__mask', {
-    y: 14, rotation: 2, duration: 2.6,
+  // Hauptfoto schwebt dezent
+  gsap.to('.polaroid--main', {
+    y: 12, duration: 3,
     ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.2,
   });
 
